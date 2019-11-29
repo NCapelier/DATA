@@ -1,0 +1,14 @@
+variables :
+
+1. dataCost
+2. coolDownTime
+3. damages
+
+4. speed
+5. lifeTime
+6. spray
+
+7. rotationSpeed
+8. maxAngle
+
+9. slowDown
