@@ -13,14 +13,15 @@ public class SpawnObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         orderringFactor = 10;
 
         int rand = Random.Range(0, objects.Length);
         instance = Instantiate(objects[rand], transform.position, Quaternion.identity);
 
-        if(instance.tag == "Building")
+        if (instance.tag == "Building")
         {
-            instance.GetComponent<SpriteRenderer>().sortingOrder = 10 - (int) (instance.transform.position.y);
+            instance.GetComponent<SpriteRenderer>().sortingOrder = 10 - (int)(instance.transform.position.y);
         }
         else if (instance.tag == "Roof")
         {
@@ -28,16 +29,28 @@ public class SpawnObject : MonoBehaviour
         }
         else if (instance.tag == "Publicity")
         {
+            Debug.Log("Pub drawed");
             instance.GetComponent<SpriteRenderer>().sortingOrder = transform.parent.gameObject.GetComponent<SpriteRenderer>().sortingOrder + 1;
         }
-        else if (transform.parent.gameObject != null)
+        else if (transform.parent.gameObject != null && instance != null && instance.GetComponent<SpriteRenderer>() != null)
         {
+
+            if(gameObject.GetComponent<SpriteRenderer>() == null)
+            {
+                Debug.Log("debug");
+                gameObject.AddComponent<SpriteRenderer>();
+            }
+            if(transform.parent.gameObject.GetComponent<SpriteRenderer>() == null)
+            {
+                transform.parent.gameObject.AddComponent<SpriteRenderer>();
+            }
             instance.GetComponent<SpriteRenderer>().sortingOrder = transform.parent.gameObject.GetComponent<SpriteRenderer>().sortingOrder + 1;
         }
 
-       
+
         StartCoroutine(Destroyer());
     }
+
 
     IEnumerator Destroyer()
     {
